@@ -1,0 +1,4 @@
+port-api: 4000
+
+database:
+  uri-mongodb: mongodb://localhost/pythondb
