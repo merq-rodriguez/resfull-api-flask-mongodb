@@ -1,5 +1,19 @@
 ## API RESTFULL FLASK PYTHON + MONGODB
 
+
+<img 
+  align="right"  
+  width="100"
+  src="https://cdn.worldvectorlogo.com/logos/flask.svg" 
+/>
+
+<img 
+  width="400"
+  src="https://cdn.worldvectorlogo.com/logos/mongodb.svg" 
+/>
+
+---
+
 Personally I did not like how flask-restful implements the controllers, it restricts the design of a restfull api a lot,
 but as an example, do this exercise.
 
