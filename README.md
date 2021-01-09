@@ -3,10 +3,28 @@
 Personally I did not like how flask-restful implements the controllers, it restricts the design of a restfull api a lot,
 but as an example, do this exercise.
 
+### Run Mongodb with Docker
+```shell
+docker run --name mongo -p 27017:27017  -d mongo:latest
+```
+
+
+
 ### Clean Pycache
-``` 
+```bash
 pyclean .
 ```
+
+### Install
+
+```bash
+pip install -r requirements.txt
+``` 
+
+## Run App
+```bash
+python3 src/app.py
+``` 
 
 > Use **GET**
 
