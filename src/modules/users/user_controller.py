@@ -15,15 +15,15 @@ def find_user(id):
   return jsonify(response)
 
 @Users.route('/users', methods=['POST'])
-def create_user(self):
+def create_user():
   data = request.json
   response = userService.create_user(data)
   return jsonify(response)
 
-@Users.route('/users', methods=['PUT'])
-def update_user(self):
+@Users.route('/users/<id>', methods=['PUT'])
+def update_user(id):
   data = request.json
-  response = userService.update_user(data)
+  response = userService.update_user(id, data)
   return jsonify({"message": "User updated"})
 
 @Users.route('/users/<id>', methods=['DELETE'])
