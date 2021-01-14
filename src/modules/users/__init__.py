@@ -1,3 +1,2 @@
-from modules.users.services.user_service import UserService
-
+from modules.users.user_service import UserService
 userService = UserService()
