@@ -1,8 +1,15 @@
-from flask_restful import Api
-from modules.users.controllers.user_controller import UserController
-from modules.users.controllers.user_data_controller import UserDataController
+from flask import jsonify
+from modules.users.user_controller import Users
+from common.exceptions import NotFoundException, InternalServerError
 
 def routes_api(app):
-  api = Api(app)
-  api.add_resource(UserController, '/users')
-  api.add_resource(UserDataController, '/users/<id>')
+  app.register_blueprint(Users)
+
+  @app.errorhandler(NotFoundException)
+  def not_found_exception(e):
+    return jsonify(e.response), e.status_code
+
+  @app.errorhandler(InternalServerError)
+  def resource_not_found(e):
+    return jsonify(e.response), e.status_code
+
