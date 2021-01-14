@@ -3,16 +3,18 @@ from flask_cors import CORS
 from routes import routes_api
 from common import setting
 
-port = setting.config['port-api']
+def bootstrap():
+  port = setting.config['port-api']
+  #Init server
+  app = Flask(__name__)
 
-#Init server
-app = Flask(__name__)
+  # Set routes
+  routes_api(app)
 
-# Set routes
-routes_api(app)
+  # Enable cors
+  CORS(app)
 
-# Enable cors
-CORS(app)
-
-if __name__ == '__main__':
+  #Run app
   app.run(debug=True, port=port)
+
+bootstrap()
