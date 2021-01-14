@@ -2,3 +2,7 @@ port-api: 4000
 
 database:
   uri-mongodb: mongodb://localhost/pythondb
+
+jwt:
+  secret-key: yout_secret_key
+  expiresin: 3600
