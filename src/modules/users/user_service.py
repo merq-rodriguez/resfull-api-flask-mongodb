@@ -1,5 +1,6 @@
-from common import MongoConnection
+from common import MongoConnection, HttpStatus
 from bson import ObjectId
+from common.exceptions import NotFoundException
 
 class UserService:
 
@@ -12,7 +13,7 @@ class UserService:
     query = { "_id": ObjectId(id) }
     user = self._collection.find_one(query)
     if not user:
-      return { "message": "User not found"}
+      raise NotFoundException("User not found")
     else:
       return {
         "_id": str(ObjectId(user['_id'])),
@@ -41,19 +42,18 @@ class UserService:
       "password": data['password'],
       "email": data['email']
     }
-  
+
   def update_user(self, id, data):
     user = { "name": data['name'], "password": data['password'], "email": data['email'] }
     query = { '_id': ObjectId(id) }
     item = self._collection.update_one(query,
-      { 
+      {
         "$set": {
         "name": data['name'],
         "password": data['password'],
         "email": data['email']
       }
     })
-    print(item)
 
   def delete_user(self, id):
     query = {'_id': ObjectId(id)}
