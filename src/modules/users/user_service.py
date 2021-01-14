@@ -1,6 +1,7 @@
 from common import MongoConnection, HttpStatus
-from bson import ObjectId
 from common.exceptions import NotFoundException
+from bson import ObjectId
+from modules.security.hash_password import hash_password
 
 class UserService:
 
@@ -34,24 +35,26 @@ class UserService:
     return users
 
   def create_user(self, data):
-    user = { "name": data['name'], "password": data['password'], "email": data['email'] }
+    password = hash_password(data['password'])
+    user = { "name": data['name'], "password": password, "email": data['email'] }
     item =  self._collection.insert_one(user)
     return {
       "id": str(ObjectId(item.inserted_id)),
-      "name": data['name'],
-      "password": data['password'],
-      "email": data['email']
+      "name": user['name'],
+      "password": user['password'],
+      "email": user['email']
     }
 
   def update_user(self, id, data):
-    user = { "name": data['name'], "password": data['password'], "email": data['email'] }
+    password = hash_password(data['password'])
+    user = { "name": data['name'], "password": password, "email": data['email'] }
     query = { '_id': ObjectId(id) }
     item = self._collection.update_one(query,
       {
         "$set": {
-        "name": data['name'],
-        "password": data['password'],
-        "email": data['email']
+        "name": user['name'],
+        "password": user['password'],
+        "email": user['email']
       }
     })
 
